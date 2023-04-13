@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Base';
+    src: url('base_font/PressStart2P-Regular.eot');
+    src: local('☺'), url('base_font/PressStart2P-Regular.woff') format('woff'), url('base_font/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
