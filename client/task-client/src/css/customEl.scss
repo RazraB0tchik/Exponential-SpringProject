@@ -20,7 +20,7 @@ $button-input-color: #FF0DFF;
   flex-direction: column;
   align-items: center;
 }
-.btn{
+.button_login{
   width: 30%;
   height: 5vh;
   background-color: $button-input-color;
@@ -47,8 +47,6 @@ $button-input-color: #FF0DFF;
 .login_icon{
   width: 15vh;
   height: 20%;
-  margin-top: 5%;
-  background-color: brown;
 }
 .inputs_element{
   width: 80%;
