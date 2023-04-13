@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
+
+$input-color: #00ff2a;
+$input-form-font: url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
+
+.form-control {
+  background-color: $input-color;
+  color: $input-color;
+  border-style: groove;
+  border-width: medium;
+  border-color: black;
+  width: 80%;
+  height: 4vh;
+}
+.form-group{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: brown;
+}
