@@ -10,7 +10,7 @@ $button-input-color: #FF0DFF;
   border-style: groove;
   border-width: medium;
   border-color: black;
-  width: 80%;
+  width: 100%;
   height: 6vh;
   border-radius: 1.5vh;
 }
@@ -20,19 +20,27 @@ $button-input-color: #FF0DFF;
   flex-direction: column;
   align-items: center;
 }
-.button_login{
-  width: 30%;
-  height: 5vh;
+.button-registration{
+  width: 70%;
+  height: 6vh;
   background-color: $button-input-color;
   font-family: Base, sans-serif;
-  font-size: 2vh;
+  font-size: 1.5vh;
   min-width: 150px;
+  word-wrap: break-word;
 }
 .text-sm-center{
   font-size: 3.5vh;
 }
+
+  //.text-xs-center{
+  //  font-size: 2vh;
+  //}
+
+
 .text-lg-center{
   font-size: 1.8vh;
+  color: $button-input-color;
 }
 
 .login_form{
@@ -42,6 +50,7 @@ $button-input-color: #FF0DFF;
   border-color: $button-input-color;
   width: 80%;
   height: 80%;
+  min-width: 90%;
   background-color: #3D3E42;
 }
 .login_icon{
@@ -50,15 +59,16 @@ $button-input-color: #FF0DFF;
 }
 .inputs_element{
   width: 80%;
-  height: 60%;
+  height: 70%;
+  //background-color: #00ff2a;
 }
 .label_text{
   font-family: "Base", sans-serif;
   color: $button-input-color;
   margin-bottom: 1vh;
 }
-.form-header{
+.form-header-registrate{
   color: $button-input-color;
   font-family: "Base", sans-serif;
-  font-size: 4vh;
+  font-size: 2.4vh;
 }
