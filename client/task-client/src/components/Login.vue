@@ -27,8 +27,8 @@
           <div :class="this.flag ? 'login_form d-none' : 'login_form d-flex flex-column align-items-center justify-content-around'">
             <LoginAnimateElem model="model/login2.gltf" fov=7 />
             <div class="inputs_element d-flex flex-column align-items-center justify-content-around">
-              <div class="form-header mb-2">Login</div>
-              <form class="w-100 d-flex flex-column justify-content-around" style="height: 75%">
+              <div class="form-header">Login</div>
+              <form class="w-100 d-flex flex-column justify-content-around" style="height: 80%">
                 <div class="form-group align-items-center">
                   <label class="label_text text-lg-center text-sm-center" for="email_form">Введите почту</label>
                   <input class = "form-control" type="email" id="email_form">
