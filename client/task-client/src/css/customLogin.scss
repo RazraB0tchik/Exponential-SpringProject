@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
+
+//login/registration
+$input-form-font: url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
+$button-input-color: #FF0DFF;
+
+
+.form-control {
+  border-style: groove;
+  border-width: medium;
+  border-color: black;
+  width: 80%;
+  height: 6vh;
+  border-radius: 1.5vh;
+}
+.form-group{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.button_login{
+  width: 30%;
+  height: 5vh;
+  background-color: $button-input-color;
+  font-family: Base, sans-serif;
+  font-size: 2vh;
+  min-width: 150px;
+}
+.text-sm-center{
+  font-size: 3.5vh;
+}
+.text-lg-center{
+  font-size: 1.8vh;
+}
+
+.login_form{
+  border-style: solid;
+  border-radius: 5vh;
+  border-width: 1vh;
+  border-color: $button-input-color;
+  width: 80%;
+  height: 80%;
+  background-color: #3D3E42;
+}
+
+.button_forgot_login{
+  width: auto;
+  height: 5vh;
+  background-color: $button-input-color;
+  font-family: Base, sans-serif;
+  font-size: 2vh;
+  min-width: 150px;
+}
+
+.login_icon{
+  width: 15vh;
+  height: 20%;
+}
+.inputs_element{
+  width: 80%;
+  height: 60%;
+}
+.inputs_element_forgot{
+  width: 80%;
+  height: 80%;
+}
+
+.label_text{
+  font-family: "Base", sans-serif;
+  color: $button-input-color;
+  margin-bottom: 1vh;
+}
+.form-header{
+  color: $button-input-color;
+  font-family: "Base", sans-serif;
+  font-size: 4vh;
+  text-align: center;
+}
+
+.login_form_forgot{
+  border-style: solid;
+  border-radius: 5vh;
+  border-width: 1vh;
+  border-color: $button-input-color;
+  width: 80%;
+  height: 80%;
+  min-width: 90%;
+  background-color: #3D3E42;
+}
+
+.form-header-description{
+  color: #00ff2a;
+  font-family: "Base", sans-serif;
+  font-size: 2.3vh;
+  text-align: center;
+}

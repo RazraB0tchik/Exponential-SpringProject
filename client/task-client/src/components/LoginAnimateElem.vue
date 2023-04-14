@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import "../css/customEl.scss"
+import "../css/customLogin.scss"
 import {
   AmbientLight,
   Color,
@@ -18,11 +18,15 @@ import {GLTFLoader} from "three/addons/loaders/GLTFLoader";
 
 export default {
   name: "LoginAnimateElem",
+  props: {
+    model: String,
+    fov: Number
+  },
   async mounted() {
   const container = document.querySelector(".login_icon");
   const scene = new Scene();
   scene.background = new Color("#3D3E42");
-  const fov = 7;
+  const fov = this.fov;
   const aspect = container.clientWidth/container.clientHeight;
   const near = 2.1;
   const far = 100;
@@ -42,7 +46,7 @@ export default {
     container.append(renderer
         .domElement); //добавляем на страницу созданный элемент
     const loader = new GLTFLoader();
-    loader.load("model/login2.gltf", (gltf) => {
+    loader.load(this.model, (gltf) => {
       element = gltf.scene;
       scene.add(element);
       element.position.set(0, 0, 10);
