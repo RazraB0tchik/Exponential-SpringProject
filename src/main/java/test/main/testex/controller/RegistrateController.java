@@ -36,13 +36,6 @@ public class RegistrateController {
                 return ResponseEntity.badRequest().body("User with email "+registrationDTO.getEmail()+ " or username "+ registrationDTO.getUsername()+" exist.");
             }
             userService.saveNewUser(registrationDTO.getUsername(), registrationDTO.getPassword(), registrationDTO.getEmail());
-            System.out.println("ok");
-            String token = filterProvider.createToken(registrationDTO.getUsername(), "USER");
-            System.out.println("success token!" + token);
-            Map<Object, Object> responseRegistration= new HashMap<>();
-            responseRegistration.put("username", registrationDTO.getUsername());
-            responseRegistration.put("tokenRegistered", token);
-            responseRegistration.put("role", userRepository.findUserByEmail(registrationDTO.getEmail()).getRole());
-            return ResponseEntity.ok(responseRegistration);
+            return ResponseEntity.ok("Success!");
     }
 }

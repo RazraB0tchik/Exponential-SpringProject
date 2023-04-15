@@ -1,5 +1,5 @@
 <template>
-  <div class="login_icon">
+  <div class="login_icon mt-2">
   </div>
 </template>
 
