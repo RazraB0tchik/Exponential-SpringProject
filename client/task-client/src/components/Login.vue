@@ -2,6 +2,9 @@
 
   <div class="container-fluid">
     <div class="row" style="background-color: #4A4A4A; justify-content: center">
+      <div id="top-alert" :class="error_flag ? 'd-block alert alert-warning alert-dismissible fade show' : 'd-none'" style="position: absolute; font-family: Base, sans-serif; font-size: 1.5vh">
+        Пользователь не найден!
+      </div>
       <div class="col-md-10 col-xl-6 " style="height: 100vh">
         <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 100%">
           <div :class="this.flag ? 'login_form_forgot d-flex flex-column align-items-center justify-content-around' : 'login_form_forgot d-none'">
@@ -30,15 +33,15 @@
               <div class="form-header">Login</div>
               <form class="w-100 d-flex flex-column justify-content-around" style="height: 80%">
                 <div class="form-group align-items-center">
-                  <label class="label_text text-lg-center text-sm-center" for="email_form">Введите почту</label>
-                  <input class = "form-control" type="email" id="email_form">
+                  <label class="label_text text-lg-center text-sm-center" for="email_form">Введите логин</label>
+                  <input v-model="login" class = "form-control" type="email" id="email_form">
                 </div>
                 <div class="form-group align-items-center">
                   <label class="label_text text-lg-center text-sm-center" for="password_form">Введите пароль</label>
-                  <input class = "form-control" type="password" id="password_form">
+                  <input v-model="passwd" class = "form-control" type="password" id="password_form">
                 </div>
                 <div class="form-group align-items-center">
-                <button type="submit" class="button_login">Войти</button>
+                <button type="button" class="button_login" @click="loginUser(this.login, this.passwd)">Войти</button>
                 </div>
                 <div class="form-group align-items-center">
                   <div class="forgot_pass text-lg-center text-sm-center" @click="showForgotWindow(this.$event)">Забыли пароль</div>
@@ -55,7 +58,9 @@
 
 <script>
 import LoginAnimateElem from "@/components/LoginAnimateElem";
-
+import controller from "../tools/requests.js"
+import axios from "axios";
+import router from "@/rout/router";
 export default {
   name: "Login",
   beforeCreate() {
@@ -64,18 +69,45 @@ export default {
   },
   data(){
     return {
-      flag: false
+      flag: false,
+      login: "",
+      passwd: "",
+      error_flag: false,
+      mapResponse: []
     }
   },
   components: {
     LoginAnimateElem
   },
   methods: {
+
+    async loginUser(login, passwd){
+      axios.post("http://localhost:8000/auth/api/login", {
+        "username": login,
+        "password": passwd
+      }).then(response => {
+        this.mapAdmin = response.data;
+        localStorage.username = this.mapAdmin.username;
+        localStorage.token = this.mapAdmin.tokenLogin;
+        localStorage.role = this.mapAdmin.role;
+        if(response.status === 200){
+          // router.push("/main");
+          console.log(localStorage.token)
+        }
+      }).catch(error => {
+            console.log(error.response.status)
+            if(error.response.status === 401){
+              this.error_flag=true;
+              setTimeout(()=>{this.error_flag = false}, 10000);
+            }
+          })
+  },
+
     showForgotWindow(e){
       this.flag = !this.flag;
+    },
     }
   }
-}
 </script>
 
 <style lang="scss">
