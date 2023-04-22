@@ -24,6 +24,7 @@ public class TestExApplication {
                         .allowedMethods("GET", "POST")
                         .allowedHeaders("*");
             }
+
         };
     }
 

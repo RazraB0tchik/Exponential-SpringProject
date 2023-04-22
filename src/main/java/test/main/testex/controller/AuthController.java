@@ -1,5 +1,6 @@
 package test.main.testex.controller;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import test.main.testex.dto.AuthentificationDTO;
 import test.main.testex.entity.User;
 import test.main.testex.filter.FilterProvider;
@@ -49,22 +50,16 @@ public class AuthController {
     @PostMapping( "/login")
     public ResponseEntity login(@RequestBody AuthentificationDTO authentificationDTO){
         try{
-            System.out.println(authentificationDTO.getUsername());
             String username = authentificationDTO.getUsername();
             User user = userRepository.findUserByUserName(username);
             if (user==null){
                 throw new UsernameNotFoundException("user with name "+username+" not found");
             }
+            if(!(new BCryptPasswordEncoder(10).matches(authentificationDTO.getPassword(), user.getPasswordUser()))){
+                throw new BadCredentialsException("Passwords mismatch");
+            }
             refreshCreator.updateRef(user);
-            System.out.println(authentificationDTO.getPassword()+" inside authController");
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, authentificationDTO.getPassword()));
-            System.out.println(authentication.getPrincipal());
-            System.out.println(SecurityContextHolder.getContext().getAuthentication() + " after userService");
-
-
-
             String token = filterProvider.createToken(username, user.getRole());
-
             Map<Object, Object> response = new HashMap<>();
             response.put("tokenLogin", token);
             response.put("username", username);
@@ -73,7 +68,10 @@ public class AuthController {
             return ResponseEntity.ok(response);
         }
         catch (AuthenticationException e){
-            throw new BadCredentialsException("Invalid username or password - " + e.getMessage()); //невнрные учетные данные
+            throw new BadCredentialsException("Invalid username or password - " + e.getMessage());
         }
+
+
     }
+
 }

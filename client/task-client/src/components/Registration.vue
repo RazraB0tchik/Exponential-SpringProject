@@ -41,8 +41,9 @@
 
 <script>
 import LoginAnimateElem from "@/components/LoginAnimateElem";
-import controller from "../tools/requests.js"
+import controller from "../tools/controller.js"
 import router from "@/rout/router";
+import axios from "axios";
 export default {
   name: "Regirtsation",
   beforeCreate() {
@@ -67,9 +68,19 @@ export default {
         setTimeout(()=>{this.error_flag = false;}, 10000)
       }
       else{
-        controller.methods.registrateUser(this.login, this.email, this.password1);
+        this.registrateUser(this.login, this.email, this.password1);
         router.push("/login");
       }
+    },
+
+    async registrateUser(login, passwd, email) {
+      axios.post("http://localhost:8000/reg/registrationUser", {
+        "username": login,
+        "password": passwd,
+        "email": email,
+      }).catch(error => {
+        console.log(error)
+      })
     }
 
   }

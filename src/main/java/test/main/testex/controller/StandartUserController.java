@@ -23,7 +23,6 @@ public class StandartUserController {
 
     @GetMapping(value = "/getNews")
     public ResponseEntity getNews(){
-        System.out.println("im here!!!!!!!!!!!!!!!!!!");
         List<News> allNews = newsRepository.findAllId();
         HashMap<Object, Object> usersMap = new HashMap<>();
         for (News news: allNews) {

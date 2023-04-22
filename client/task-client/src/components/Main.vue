@@ -3,7 +3,7 @@
     <div class="row" style="background-color: #4A4A4A; justify-content: center">
       <div class="col-md-10 col-xl-6 " style="height: 100vh">
         <ul v-for="elem in newsMap" :key="elem">
-          <li>{{elem}}</li>
+          <li style="color: white">{{elem}}</li>
         </ul>
       </div>
     </div>
@@ -11,58 +11,40 @@
 </template>
 
 <script>
-import axios from "axios";
-import router from "@/rout/router";
+import controller from "@/tools/controller";
 
 export default {
   name: "Main",
   data(){
     return{
-      newsMap: []
+      newsMap: [],
+      startPage: false,
     }
   },
-  mounted() {
-    this.getNews()
+
+  created() {
+    this.startInterval()
   },
+  watch: {
+    $route: 'stopInterval'
+  },
+
   methods:{
-    async getNews(){
-      await axios.get("http://localhost:8000/controller1/getNews")
-      .then(response => {
-        this.newsMap = response.data;
-        console.log(this.newsMap)
-      })
-      .catch(error => {
-        if(error.response.status === 401){
-          router.push("/login");
-        }
-        else{
-          this.updateAccess();
-        }
-      })
+    startInterval(){
+      if(this.startPage)
+      console.log("im here");
+      controller.method.getNews().then(response => {this.newsMap = response.data});
+      console.log(this.newsMap);
+      this.interval = setInterval(()=>{controller.method.getNews().then(response => {this.newsMap = response.data})}, 3000)
     },
-    async updateAccess() {
-      await axios.post("http://localhost:8000/update/getAccess", {
-            "username": localStorage.user,
-            "role": localStorage.roleUser,
-          },
-          {
-            mode: "cors",
-            credentials: "same-origin",
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => {
-            this.mapUser = response.data;
-            localStorage.user = this.mapUser.username;
-            localStorage.tokenUser = this.mapUser.tokenUpdate;
-            localStorage.roleUser = this.mapUser.role;
-          })
 
-    },
-  }
-
-
+    stopInterval(){
+      clearInterval(this.interval);
+    }
+  },
+  // mounted() {
+  //   controller.method.getNews().then(response => {this.newsMap = response.data});
+  // }
 }
 </script>
 

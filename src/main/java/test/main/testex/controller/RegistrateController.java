@@ -30,7 +30,6 @@ public class RegistrateController {
 
     @PostMapping(value = "/registrationUser")
     public ResponseEntity registration(@RequestBody RegistrationDTO registrationDTO){
-        System.out.println("im here");
             User user = userRepository.findUserByUserNameOrEmail(registrationDTO.getUsername(), registrationDTO.getEmail());
             if(user!=null){
                 return ResponseEntity.badRequest().body("User with email "+registrationDTO.getEmail()+ " or username "+ registrationDTO.getUsername()+" exist.");
