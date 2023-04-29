@@ -29,4 +29,5 @@ public class News {
         this.textNews = textNews;
         this.img = img;
     }
+
 }

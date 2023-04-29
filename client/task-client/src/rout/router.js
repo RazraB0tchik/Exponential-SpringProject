@@ -3,12 +3,22 @@ import Login from "@/components/Login";
 import Registration from "@/components/Registration";
 import Main from "@/components/Main";
 const routes = [
-    {path: "/login", component: Login},
-    {path: "/registration", component: Registration},
-    {path: "/main", component: Main}
+    {path: "/login", component: Login, name: "Login"},
+    {path: "/registration", component: Registration, name: "Registration"},
+    {path: "/main", component: Main, name: "Main"}
 ]
 
-export default new createRouter({
-  history: createWebHistory(),
-  routes
+const router = createRouter({history: createWebHistory(),
+    routes})
+
+router.beforeEach((to) => {
+    if(to.name === "Main"){
+        Main.methods.startInterval();
+    }
+    if(to.name === "Login"){
+        Main.methods.stopInterval();
+    }
+
 })
+
+export default router

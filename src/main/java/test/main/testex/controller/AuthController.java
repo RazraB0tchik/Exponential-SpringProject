@@ -1,5 +1,6 @@
 package test.main.testex.controller;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import test.main.testex.dto.AuthentificationDTO;
 import test.main.testex.entity.User;
 import test.main.testex.filter.FilterProvider;
@@ -55,14 +56,10 @@ public class AuthController {
             if (user==null){
                 throw new UsernameNotFoundException("user with name "+username+" not found");
             }
+            if(!(new BCryptPasswordEncoder(10).matches(authentificationDTO.getPassword(), user.getPasswordUser()))){
+                throw new BadCredentialsException("Passwords mismatch");
+            }
             refreshCreator.updateRef(user);
-            System.out.println(authentificationDTO.getPassword()+" inside authController");
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, authentificationDTO.getPassword()));
-            System.out.println(authentication.getPrincipal());
-            System.out.println(SecurityContextHolder.getContext().getAuthentication() + " after userService");
-
-
-
             String token = filterProvider.createToken(username, user.getRole());
 
             Map<Object, Object> response = new HashMap<>();

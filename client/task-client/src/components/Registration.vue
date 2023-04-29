@@ -41,8 +41,9 @@
 
 <script>
 import LoginAnimateElem from "@/components/LoginAnimateElem";
-import controller from "../tools/requests.js"
+import controller from "../tools/controller.js"
 import router from "@/rout/router";
+import axios from "axios";
 export default {
   name: "Regirtsation",
   beforeCreate() {
@@ -67,9 +68,19 @@ export default {
         setTimeout(()=>{this.error_flag = false;}, 10000)
       }
       else{
-        controller.methods.registrateUser(this.login, this.email, this.password1);
+        this.registrateUser(this.login, this.password1, this.email);
         router.push("/login");
       }
+    },
+
+    async registrateUser(login, passwd, email) {
+      axios.post("http://localhost:8000/reg/registrationUser", {
+        "username": login,
+        "password": passwd,
+        "email": email,
+      }).catch(error => {
+        console.log(error)
+      })
     }
 
   }
@@ -77,7 +88,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
 @import "../fonts/fonts.css";
 
 .forgot_pass{

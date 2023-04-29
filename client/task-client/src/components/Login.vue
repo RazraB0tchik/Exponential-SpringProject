@@ -58,7 +58,8 @@
 
 <script>
 import LoginAnimateElem from "@/components/LoginAnimateElem";
-import controller from "../tools/requests.js"
+import Main from "@/components/Main";
+import controller from "../tools/controller.js"
 import axios from "axios";
 import router from "@/rout/router";
 export default {
@@ -73,7 +74,8 @@ export default {
       login: "",
       passwd: "",
       error_flag: false,
-      mapResponse: []
+      mapResponse: [],
+      mapUserEl: []
     }
   },
   components: {
@@ -86,13 +88,14 @@ export default {
         "username": login,
         "password": passwd
       }).then(response => {
-        this.mapAdmin = response.data;
-        localStorage.username = this.mapAdmin.username;
-        localStorage.token = this.mapAdmin.tokenLogin;
-        localStorage.role = this.mapAdmin.role;
+        this.mapUserEl = response.data;
+        localStorage.username = this.mapUserEl.username;
+        localStorage.token = this.mapUserEl.tokenLogin;
+        localStorage.role = this.mapUserEl.role;
         if(response.status === 200){
-          // router.push("/main");
-          console.log(localStorage.token)
+          console.log(localStorage.token);
+          Main.data().startPage = true;
+          router.push("/main");
         }
       }).catch(error => {
             console.log(error.response.status)
@@ -111,7 +114,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
 @import "../fonts/fonts.css";
 
 .forgot_pass{

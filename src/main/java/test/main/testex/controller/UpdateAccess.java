@@ -25,12 +25,16 @@ public class UpdateAccess {
 
     @PostMapping(value ="/getAccess")
     public ResponseEntity updateAccess(@RequestBody UpdateAccessDTO updateAccessDTO) throws JsonProcessingException {
-        String token = filterProvider.createToken(updateAccessDTO.getUsername(), updateAccessDTO.getRole());
-        HashMap<Object, Object> newAccess = new HashMap<>();
-        newAccess.put("tokenUpdate", token);
-        newAccess.put("username", updateAccessDTO.getUsername());
-        newAccess.put("role", updateAccessDTO.getRole());
-
-        return ResponseEntity.ok(newAccess);
+        if(filterProvider.checkRefreshToken(updateAccessDTO.getUsername())) {
+            String token = filterProvider.createToken(updateAccessDTO.getUsername(), updateAccessDTO.getRole());
+            HashMap<Object, Object> newAccess = new HashMap<>();
+            newAccess.put("tokenUpdate", token);
+            newAccess.put("username", updateAccessDTO.getUsername());
+            newAccess.put("role", updateAccessDTO.getRole());
+            return ResponseEntity.ok(newAccess);
+        }
+        else {
+            return ResponseEntity.status(405).body("Invalid refresh token");
+        }
     }
 }
