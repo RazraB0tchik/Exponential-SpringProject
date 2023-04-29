@@ -50,6 +50,7 @@ public class AuthController {
     @PostMapping( "/login")
     public ResponseEntity login(@RequestBody AuthentificationDTO authentificationDTO){
         try{
+            System.out.println(authentificationDTO.getUsername());
             String username = authentificationDTO.getUsername();
             User user = userRepository.findUserByUserName(username);
             if (user==null){
@@ -60,6 +61,7 @@ public class AuthController {
             }
             refreshCreator.updateRef(user);
             String token = filterProvider.createToken(username, user.getRole());
+
             Map<Object, Object> response = new HashMap<>();
             response.put("tokenLogin", token);
             response.put("username", username);
@@ -68,10 +70,7 @@ public class AuthController {
             return ResponseEntity.ok(response);
         }
         catch (AuthenticationException e){
-            throw new BadCredentialsException("Invalid username or password - " + e.getMessage());
+            throw new BadCredentialsException("Invalid username or password - " + e.getMessage()); //невнрные учетные данные
         }
-
-
     }
-
 }

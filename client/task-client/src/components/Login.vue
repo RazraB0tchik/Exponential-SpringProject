@@ -58,6 +58,7 @@
 
 <script>
 import LoginAnimateElem from "@/components/LoginAnimateElem";
+import Main from "@/components/Main";
 import controller from "../tools/controller.js"
 import axios from "axios";
 import router from "@/rout/router";
@@ -93,6 +94,7 @@ export default {
         localStorage.role = this.mapUserEl.role;
         if(response.status === 200){
           console.log(localStorage.token);
+          Main.data().startPage = true;
           router.push("/main");
         }
       }).catch(error => {

@@ -68,7 +68,7 @@ export default {
         setTimeout(()=>{this.error_flag = false;}, 10000)
       }
       else{
-        this.registrateUser(this.login, this.email, this.password1);
+        this.registrateUser(this.login, this.password1, this.email);
         router.push("/login");
       }
     },
@@ -88,7 +88,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=IM+Fell+Double+Pica:ital@1&family=Open+Sans&family=Oswald&family=PT+Serif:ital@1&family=Raleway:wght@500&display=swap');
 @import "../fonts/fonts.css";
 
 .forgot_pass{

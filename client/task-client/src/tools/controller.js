@@ -41,6 +41,7 @@ api.interceptors.request.use(config => {
 }, error => {
     console.log(error);
 }),
+
 api.interceptors.response.use(undefined, async error => {
     if (error.response.status === 401) {
         await updateAccess();
@@ -54,7 +55,6 @@ api.interceptors.response.use(undefined, async error => {
 
     }
     if (error.response.status === 405){
-        Main.methods.stopInterval();
         router.push("/login");
     }
 })

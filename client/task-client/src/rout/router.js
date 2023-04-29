@@ -11,10 +11,14 @@ const routes = [
 const router = createRouter({history: createWebHistory(),
     routes})
 
-// router.beforeEach((to) => {
-//     if(to.name === "Main"){
-//         Main.method.startInterval();
-//     }
-// })
+router.beforeEach((to) => {
+    if(to.name === "Main"){
+        Main.methods.startInterval();
+    }
+    if(to.name === "Login"){
+        Main.methods.stopInterval();
+    }
+
+})
 
 export default router

@@ -48,7 +48,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception{
 
         http
-                .httpBasic().and().csrf().disable() //http Security конфигурация проверят ауентификацию пользователя для каждого запроса (если запрос был отправлен аутентифицированным пользователем то збс)
+                .httpBasic().and().csrf().disable()
                 .authorizeHttpRequests(request -> {
                     request
                             .requestMatchers("/auth/api/login", "/reg/registrationUser", "/update/getAccess/**").permitAll()

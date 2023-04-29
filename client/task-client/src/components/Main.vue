@@ -18,33 +18,28 @@ export default {
   data(){
     return{
       newsMap: [],
-      startPage: false,
+      interval: null
     }
   },
-  beforeUpdate() {
-    this.startInterval()
-    console.log("hello!!")
-  },
-  created() {
-    controller.method.getNews().then(response => {this.newsMap = response.data});
-  },
-  watch: {
-    $route: 'stopInterval'
+  mounted() {
+    controller.method.getNews().then(response => {
+      this.newsMap = response.data
+    });
   },
 
   methods:{
     startInterval(){
-      if(this.startPage)
-      console.log("im here");
-      controller.method.getNews().then(response => {this.newsMap = response.data});
-      console.log(this.newsMap);
-      this.interval = setInterval(()=>{controller.method.getNews().then(response => {this.newsMap = response.data})}, 3000)
+        this.interval = setInterval(() => {
+          controller.method.getNews().then(response => {
+            this.newsMap = response.data
+          })
+        }, 3000)
     },
 
     stopInterval(){
-      clearInterval(this.interval);
+          clearInterval(this.interval);
     }
-  },
+  }
 }
 </script>
 
