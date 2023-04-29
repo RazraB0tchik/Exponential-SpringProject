@@ -21,9 +21,12 @@ export default {
       startPage: false,
     }
   },
-
-  created() {
+  beforeUpdate() {
     this.startInterval()
+    console.log("hello!!")
+  },
+  created() {
+    controller.method.getNews().then(response => {this.newsMap = response.data});
   },
   watch: {
     $route: 'stopInterval'
@@ -42,9 +45,6 @@ export default {
       clearInterval(this.interval);
     }
   },
-  // mounted() {
-  //   controller.method.getNews().then(response => {this.newsMap = response.data});
-  // }
 }
 </script>
 
